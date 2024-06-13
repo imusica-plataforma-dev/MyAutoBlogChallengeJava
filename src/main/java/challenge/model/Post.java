@@ -19,7 +19,7 @@ public class Post {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	private Date date = new Date();
+	private Date date;
 	
 	@NotBlank(message = "Título é obrigatório")
 	private String title;

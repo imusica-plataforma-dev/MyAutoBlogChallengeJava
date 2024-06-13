@@ -1,5 +1,6 @@
 package challenge.model;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import challenge.validator.EmailNotRegistered;
+import com.google.common.hash.Hashing;
 
 @Entity
 public class User {
@@ -27,6 +29,7 @@ public class User {
 
 	@Email(message = "Email inválido")
 	@EmailNotRegistered
+	@NotBlank(message = "Email é obrigatório")
 	private String email;
 
 	@JsonProperty(value = "password", access = JsonProperty.Access.WRITE_ONLY)
@@ -52,6 +55,17 @@ public class User {
 		this.password = password;
 		this.enabled = enabled;
 		this.posts = posts;
+	}
+
+	public static User encrypted(User user) {
+		User encryptedUser = new User();
+		encryptedUser.setId(user.getId());
+		encryptedUser.setName(user.getName());
+		encryptedUser.setPassword(Hashing.sha256().hashString(user.getPassword(), StandardCharsets.UTF_8).toString());
+		encryptedUser.setEmail(user.getEmail());
+		encryptedUser.setEnabled(user.isEnabled());
+		encryptedUser.setPosts(user.getPosts());
+		return encryptedUser;
 	}
 
 	public Long getId() {

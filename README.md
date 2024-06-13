@@ -16,33 +16,42 @@ Neste desafio serão avaliados os conhecimentos do candidato no campo do desenvo
 - JWT;
 - Conexão e manipulação de banco de dados com Spring Data JPA.
 
-O objetivo desta tarefa é a manutenção de um sistema que armazena usuários e suas respectivas postagens, para tal, serão requeridas tarefas em uma api RESTful em Spring Boot. A persistência dos dados é feita com uma base H2 em memória integrada na própria aplicação. 
+O objetivo desta tarefa é a manutenção de um sistema que armazena usuários e suas respectivas postagens, para tal, serão requeridas tarefas em uma api RESTful em Spring Boot. A persistência dos dados é feita com uma base H2 () em memória integrada na própria aplicação. 
 
 A seguir serão descritos os requisitos do sistema proposto.
 
 ### Requisitos
 
-Usuários:
-Os requisitos desse módulo estão implementados, porém ainda é necessário corrigir um bug relacionado à validação do email durante o cadastro. Ocorre que quando um novo usuário tenta se registrar, o sistema impede o cadastro dizendo que o email já está sendo usado mesmo não sendo o caso.
+1. Usuários:
 
-- A comunicação entre as requisições da aplicação devem ser realizadas utilizando-se o formato JSON.
-- Usuário deve ser capaz de cadastrar-se no sistema provendo as informações básicas de nome, email e senha. Não deve ser possível a existência de dois usuários de ids diferentes com o mesmo endereço de email.
-- Usuário deve ser capaz de logar-se no sistema fornecendo email e senha.
-  - Resposta da api deve conter um token JWT que será utilizado para acesso a rotas privadas.
-- O usuário deverá realizar operações privadas na aplicação utilizando-se de um mecanismo de Bearer Token que deve ser enviado através de header nas requisições de listagem, criação, edição, exclusão de postagens.
+- 1.1. A comunicação entre as requisições da aplicação devem ser realizadas utilizando-se o formato JSON.
+- 1.2. Usuário deve ser capaz de cadastrar-se no sistema provendo as informações básicas de nome, email e senha. Não deve ser possível a existência de dois usuários de ids diferentes com o mesmo endereço de email. A senha deve ser salva como hash SHA256.
+- 1.3. Usuário deve ser capaz de logar-se no sistema fornecendo email e senha (hash SHA256). A Resposta da API deve conter um token JWT que será utilizado para acesso a rotas privadas.
+- 1.4. O usuário deverá realizar operações privadas na aplicação utilizando-se de um mecanismo de Bearer Token que deve ser enviado através de header nas requisições de listagem, criação, edição, exclusão de postagens.
 
-Postagens:
-Todos os requisitos desse módulo precisam ser implementados.
+2. Postagens:
 
--   Usuário deve ser capaz de criar postagens contendo título, texto da postagem; além destes campos, a hora de criação da postagem também deve ser armazenada, porém, esta deve ser obtida de forma automatizada.
--   Usuário deve ser capaz de listar as postagens disponíveis criadas por ele e por outros usuários da aplicação.
--   Usuário deve ser capaz de editar atributos de uma postagem que tenha criado com exceção dos campos id e data de criação da postagem.
--   Usuário deve ser capaz de excluir uma postagem que tenha criado.
+- 2.1. Usuário deve ser capaz de criar postagens contendo título, texto da postagem; além destes campos, a hora de criação da postagem também deve ser armazenada, porém, esta deve ser obtida de forma automatizada.
+- 2.2. Usuário deve ser capaz de capturar detalhes de uma determinada postagem.
+- 2.3. Usuário deve ser capaz de listar as postagens criadas por ele.
+- 2.4. Usuário deve ser capaz de editar atributos de uma postagem que tenha criado com exceção dos campos id e data de criação da postagem.
+- 2.5. Usuário deve ser capaz de excluir uma postagem que tenha criado.
 
 Atenção:
-Rotas de criação/ listagem/ update/remoção de postagens devem ser implementadas de forma privada sendo acessíveis somente através de passagem de token de autenticação no header Authorization da requisição.
+Rotas de criação/listagem/update/remoção de postagens devem ser implementadas de forma privada sendo acessíveis somente através de passagem de token de autenticação no header Authorization da requisição.
+
+### Questões da Avaliação
+
+1. Corrigir bug de privacidade de dados relacionado ao login do usuário (requisito 1.2). A senha não está sendo salva como hash SHA256.
+2. Data da postagem não está sendo salva (requisito 2.1).
+3. Implementar requisito 2.2 do módulo de Postagens.
+4. Corrigir bug relacionado à listagem de posts (requisito 2.3). Estão sendo listados posts de todos os usuários e não apenas do usuário logado.
+5. Implementar requisito 2.4 do módulo de Postagens.
+6. Implementar requisito 2.5 do módulo de Postagens.
+7. Ampliar TTL/expiration do JWT para 24h (alteração do requisito 1.3).
 
 ### Rotas da aplicação
+
 Para facilitar o entendimento do desafio proposto, abaixo uma sugestão para as rotas da aplicação:
 
 ```
@@ -55,5 +64,4 @@ Para facilitar o entendimento do desafio proposto, abaixo uma sugestão para as 
 - [DELETE] {{baseURL}}/posts/:postId = Rota para exclusão de posts do usuário
 ```
 
-Para facilitar as consultas foi colocada uma collection do postman contendo todas essas rotas na pasta resources/postman da aplicação, basta importa-las.  
-
+Para facilitar as consultas foi colocada uma collection do postman contendo todas essas rotas na pasta resources/postman da aplicação, basta importa-las.

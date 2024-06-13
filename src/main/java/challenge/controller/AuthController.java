@@ -16,9 +16,6 @@ import challenge.security.SecUserDetailsService;
 public class AuthController {
 
     @Autowired
-    AuthenticationManager authenticationManager;
-
-    @Autowired
     SecUserDetailsService userDetailsService;
 
     @Autowired
@@ -29,9 +26,8 @@ public class AuthController {
 
     @PostMapping("/users/signIn")
     public ResponseEntity<?> authenticate(@RequestBody AuthenticationRequest authenticationRequest) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getEmail());
+        UserDetails userDetails = userDetailsService.loadUserByUsernameAndPassword(authenticationRequest.getEmail(), authenticationRequest.getPassword());
         String jwt = jwtUtil.generateToken(userDetails);
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
-
     }
 }

@@ -1,9 +1,11 @@
 package challenge.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.web.authentication.session.SessionAuthenticationException;
 import org.springframework.stereotype.Service;
 
 import challenge.model.User;
@@ -18,8 +20,19 @@ public class SecUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = userRepository.findByEmail(username);
 		if (user == null) {
-			throw new UsernameNotFoundException(username);
+			throw new UsernameNotFoundException(String.format("Username %s not found", username));
 		} else {
+			UserDetails details = new SecUserDetails(user);
+			return details;
+		}
+	}
+
+	public UserDetails loadUserByUsernameAndPassword(String username, String password) throws UsernameNotFoundException {
+		User user = userRepository.findByEmailAndPassword(username, password);
+		if (user == null) {
+			throw new SessionAuthenticationException("Login failed");
+		} else {
+			user.setPassword(new String());
 			UserDetails details = new SecUserDetails(user);
 			return details;
 		}
