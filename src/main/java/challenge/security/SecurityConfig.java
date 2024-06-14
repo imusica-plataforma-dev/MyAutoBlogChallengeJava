@@ -32,11 +32,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(HttpSecurity security) throws Exception {
-		security.csrf().disable().authorizeRequests().antMatchers("/users", "/users/signIn").permitAll().anyRequest()
+		security.csrf().disable().authorizeRequests().antMatchers("/users", "/users/signIn", "/h2-console/**").permitAll().anyRequest()
 				.authenticated().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
 		security.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-
+		security.headers().frameOptions().disable();
 	}
 
 	@Bean
