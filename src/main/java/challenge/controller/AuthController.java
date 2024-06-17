@@ -1,8 +1,8 @@
 package challenge.controller;
 
+import challenge.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,8 +26,17 @@ public class AuthController {
 
     @PostMapping("/users/signIn")
     public ResponseEntity<?> authenticate(@RequestBody AuthenticationRequest authenticationRequest) {
-        UserDetails userDetails = userDetailsService.loadUserByUsernameAndPassword(authenticationRequest.getEmail(), authenticationRequest.getPassword());
+
+        User user = new User();
+        user.setEmail(authenticationRequest.getEmail());
+        user.setPassword(authenticationRequest.getPassword());
+
+        user = User.getPasswordEncryptedUser(user);
+
+        UserDetails userDetails = userDetailsService.loadUserByEmailAndPassword(user.getEmail(), user.getPassword());
+
         String jwt = jwtUtil.generateToken(userDetails);
+
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
 }

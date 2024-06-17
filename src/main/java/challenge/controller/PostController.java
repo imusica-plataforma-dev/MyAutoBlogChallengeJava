@@ -27,7 +27,7 @@ public class PostController {
 	private AuthenticationFacade authentication;
 
 	@GetMapping("/posts")
-	public List<Post> listPosts(@Valid @RequestBody Post post) {
+	public List<Post> listPosts() {
 		return Lists.newArrayList(repository.findAll());
 	}
 

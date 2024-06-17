@@ -1,18 +1,23 @@
 {
 	"info": {
-		"_postman_id": "6c08c486-873e-42b5-8b47-21f5f6aa3a2b",
+		"_postman_id": "7d139524-b4b9-41f1-ad1a-fcfe11fcee23",
 		"name": "MyAutoBlogChallengeJava",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19731980",
+		"_collection_link": "https://dark-moon-719989.postman.co/workspace/Plataforma~aa628d8f-f471-43dc-9c0f-a598b7a1447c/collection/19731980-7d139524-b4b9-41f1-ad1a-fcfe11fcee23?action=share&source=collection_link&creator=19731980"
 	},
 	"item": [
 		{
 			"name": "Cadastro de usuário",
 			"request": {
+				"auth": {
+					"type": "noauth"
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Challenge\",\r\n    \"email\": \"teste@imusica.com.br\",\r\n    \"password\": \"teste\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Gandalf\",\r\n    \"email\": \"gandalf1@gmail.com\",\r\n    \"password\": \"G@ND@LF\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -36,11 +41,14 @@
 		{
 			"name": "Autentica usuário",
 			"request": {
+				"auth": {
+					"type": "noauth"
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"teste@imusica.com.br\",\r\n    \"password\": \"teste\"\r\n}",
+					"raw": "{\r\n    \"email\": \"gandalf1@gmail.com\",\r\n    \"password\": \"G@ND@LF\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -65,14 +73,18 @@
 		{
 			"name": "Mostrar usuário logado",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJnYW5kYWxmMUBnbWFpbC5jb20iLCJpYXQiOjE3MTg2MzA2NDUsImV4cCI6MTcxODY2NjY0NX0.kavy4FSriZdKJWI-rA9wE4AlDnmR4UWu68iKFG72H3o",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0ZUBpbXVzaWNhLmNvbS5iciIsImlhdCI6MTYyOTI0MDA4MywiZXhwIjoxNjI5Mjc2MDgzfQ.Pl6T2hP3DOkaENMA0hgGkKenpDv0pVnEtZ5Y6Wtpnv",
-						"type": "text"
-					}
-				],
+				"header": [],
 				"url": {
 					"raw": "http://localhost:8080/users/logged",
 					"protocol": "http",
@@ -91,17 +103,21 @@
 		{
 			"name": "Cadastra post",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJnYW5kYWxmMUBnbWFpbC5jb20iLCJpYXQiOjE3MTg2MzA2NDUsImV4cCI6MTcxODY2NjY0NX0.kavy4FSriZdKJWI-rA9wE4AlDnmR4UWu68iKFG72H3o",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0ZUBpbXVzaWNhLmNvbS5iciIsImlhdCI6MTYyOTIzOTk5MiwiZXhwIjoxNjI5Mjc1OTkyfQ.QHzPi5nSvSwZLdZ2PzF0mMgea222yMZ6LRCqs0KhFwo",
-						"type": "text"
-					}
-				],
+				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"title\",\r\n    \"text\": \"text\"\r\n}",
+					"raw": "{\r\n    \"title\": \"You Shall not Pass!\",\r\n    \"text\": \"The evil Balrog reached the bridge. Gandalf stood in the middle of the span, leaning on the staff in his left hand, but in his other hand Glamdring gleamed, cold and white.\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -124,27 +140,19 @@
 		},
 		{
 			"name": "Lista posts",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0ZUBpbXVzaWNhLmNvbS5iciIsImlhdCI6MTYyOTI0MDA4MywiZXhwIjoxNjI5Mjc2MDgzfQ.Pl6T2hP3DOkaENMA0hgGkKenpDv0pVnEtZ5Y6Wtpnvc",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"title\",\r\n    \"text\": \"text\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJnYW5kYWxmMUBnbWFpbC5jb20iLCJpYXQiOjE3MTg2MzA2NDUsImV4cCI6MTcxODY2NjY0NX0.kavy4FSriZdKJWI-rA9wE4AlDnmR4UWu68iKFG72H3o",
+							"type": "string"
 						}
-					}
+					]
 				},
+				"method": "GET",
+				"header": [],
 				"url": {
 					"raw": "http://localhost:8080/posts",
 					"protocol": "http",
@@ -161,27 +169,19 @@
 		},
 		{
 			"name": "Consulta post",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0ZUBpbXVzaWNhLmNvbS5iciIsImlhdCI6MTYyOTIzOTk5MiwiZXhwIjoxNjI5Mjc1OTkyfQ.QHzPi5nSvSwZLdZ2PzF0mMgea222yMZ6LRCqs0KhFwo",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"title\",\r\n    \"text\": \"text\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJnYW5kYWxmQGdtYWlsLmNvbSIsImlhdCI6MTcxODMxMTUyOCwiZXhwIjoxNzE4MzQ3NTI4fQ.KhXrBOEeSYXNktjV0WsHD1NSFK757cHSgWtL9BkBTSU",
+							"type": "string"
 						}
-					}
+					]
 				},
+				"method": "GET",
+				"header": [],
 				"url": {
 					"raw": "http://localhost:8080/posts/1",
 					"protocol": "http",
@@ -200,17 +200,21 @@
 		{
 			"name": "Editar post",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJnYW5kYWxmQGdtYWlsLmNvbSIsImlhdCI6MTcxODMxMTUyOCwiZXhwIjoxNzE4MzQ3NTI4fQ.KhXrBOEeSYXNktjV0WsHD1NSFK757cHSgWtL9BkBTSU",
+							"type": "string"
+						}
+					]
+				},
 				"method": "PUT",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0ZUBpbXVzaWNhLmNvbS5iciIsImlhdCI6MTYyOTIzOTk5MiwiZXhwIjoxNjI5Mjc1OTkyfQ.QHzPi5nSvSwZLdZ2PzF0mMgea222yMZ6LRCqs0KhFwo",
-						"type": "text"
-					}
-				],
+				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"title\",\r\n    \"text\": \"text\"\r\n}",
+					"raw": "{\r\n    \"title\": \"You Shall not Pass! - Updated\",\r\n    \"text\": \"The evil Balrog reached the bridge. Gandalf stood in the middle of the span, leaning on the staff in his left hand, but in his other hand Glamdring gleamed, cold and white.\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -235,14 +239,18 @@
 		{
 			"name": "Excluir post",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJnYW5kYWxmMUBnbWFpbC5jb20iLCJpYXQiOjE3MTgzOTE2MjYsImV4cCI6MTcxODQyNzYyNn0.82ZTcOhXIhAD4pJrKFurODbxInSby3qkVphp4stcyqg",
+							"type": "string"
+						}
+					]
+				},
 				"method": "DELETE",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0ZUBpbXVzaWNhLmNvbS5iciIsImlhdCI6MTYyOTIzOTk5MiwiZXhwIjoxNjI5Mjc1OTkyfQ.QHzPi5nSvSwZLdZ2PzF0mMgea222yMZ6LRCqs0KhFwo",
-						"type": "text"
-					}
-				],
+				"header": [],
 				"url": {
 					"raw": "http://localhost:8080/posts/1",
 					"protocol": "http",

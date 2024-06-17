@@ -1,7 +1,6 @@
 package challenge.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -27,12 +26,12 @@ public class SecUserDetailsService implements UserDetailsService {
 		}
 	}
 
-	public UserDetails loadUserByUsernameAndPassword(String username, String password) throws UsernameNotFoundException {
+	public UserDetails loadUserByEmailAndPassword(String username, String password) throws UsernameNotFoundException {
 		User user = userRepository.findByEmailAndPassword(username, password);
 		if (user == null) {
 			throw new SessionAuthenticationException("Login failed");
 		} else {
-			user.setPassword(new String());
+			user.hidePassword();
 			UserDetails details = new SecUserDetails(user);
 			return details;
 		}

@@ -57,15 +57,9 @@ public class User {
 		this.posts = posts;
 	}
 
-	public static User encrypted(User user) {
-		User encryptedUser = new User();
-		encryptedUser.setId(user.getId());
-		encryptedUser.setName(user.getName());
-		encryptedUser.setPassword(Hashing.sha256().hashString(user.getPassword(), StandardCharsets.UTF_8).toString());
-		encryptedUser.setEmail(user.getEmail());
-		encryptedUser.setEnabled(user.isEnabled());
-		encryptedUser.setPosts(user.getPosts());
-		return encryptedUser;
+	public static User getPasswordEncryptedUser(User user) {
+		user.setPassword(Hashing.sha256().hashString(user.getPassword(), StandardCharsets.UTF_8).toString());
+		return user;
 	}
 
 	public Long getId() {
@@ -98,6 +92,10 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public void hidePassword() {
+		this.setPassword("");
 	}
 
 	public boolean isEnabled() {
