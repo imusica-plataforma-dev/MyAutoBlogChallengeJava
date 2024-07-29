@@ -18,7 +18,7 @@ Neste desafio serão avaliados os conhecimentos do candidato no campo do desenvo
 
 O objetivo desta tarefa é a manutenção de um sistema que armazena usuários e suas respectivas postagens, para tal, serão requeridas tarefas em uma api RESTful em Spring Boot. 
 
-A persistência dos dados é feita com uma base H2 (memória). Para ver os dados salvos em memória (com a aplicação rodando), basta acessar http://localhost:8080/he-console e preencher os dados de login com os dados presentes no arquivo de propriedades.
+A persistência dos dados é feita com uma base H2 (memória). Para ver os dados salvos em memória (com a aplicação rodando), basta acessar http://localhost:8080/h2-console e preencher os dados de login com os dados presentes no arquivo de propriedades.
 
 A seguir serão descritos os requisitos do sistema proposto.
 
