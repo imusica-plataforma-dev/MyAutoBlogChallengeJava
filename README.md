@@ -59,7 +59,7 @@ Para facilitar o entendimento do desafio proposto, abaixo uma sugestão para as 
 ```
 - [POST] {{baseURL}}/users = Rota de criação de usuários 
 - [POST {{baseURL}}/users/signIn = Rota de autenticação de usuários 
-- [GET {{baseURL}}/users/logged = Rota de consulta do usuário logado 
+- [GET] {{baseURL}}/users/logged = Rota de consulta do usuário logado 
 - [GET] {{baseURL}}/posts = Rota de listagem de posts do usuário 
 - [POST] {{baseURL}}/posts = Rota de criação de posts do usuário 
 - [PUT] {{baseURL}}/posts/:postId = Rota para atualização de posts do usuário 
